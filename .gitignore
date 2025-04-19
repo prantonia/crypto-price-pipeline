@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.env
+data/prices.csv
+logs/fetch_prices.log
+logs/transform_store.log
+logs/scheduler.log
+venv/
