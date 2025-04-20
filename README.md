@@ -1,29 +1,36 @@
-# 📊 Crypto Price Pipeline with Dashboard, PostgreSQL & Docker
+# Crypto Price Pipeline
+
+**This project is a collaborative beginner-friendly group project** built under the **Beginner Review Cohort 1** of the [Data Engineering Community (DEC)](https://dataengineeringcommunity.com/).  
+We're Team **DataForge** — a group of aspiring data engineers learning by building hands-on projects together.
+
+---
+
 
 This project is a lightweight but scalable crypto price tracking system that fetches real-time Bitcoin and Ethereum prices from the [CoinGecko API](https://www.coingecko.com/en/api), processes the data, stores it in both a CSV and PostgreSQL database, and visualizes it in a live-updating dashboard built with Streamlit.
+It can be fully containerized with Docker and can be run on any platform with minimal setup.
 
 Whether you're a data enthusiast, developer, or learner exploring ETL pipelines and dashboards, this project gives you a full, practical walk-through of data engineering essentials.
 
 ---
 
-## 🧭 Table of Contents
+## Table of Contents
 
-- [📌 Features](#-features)
-- [📐 Architecture Overview](#-architecture-overview)
-- [🧰 Why These Tools?](#-why-these-tools)
-- [🚀 Getting Started](#-getting-started)
-  - [🧪 Run Locally (Without Docker)](#run-locally-without-docker)
-  - [🐳 Run with Docker Compose](#run-with-docker-compose)
-- [🔍 Project Structure](#-project-structure)
-- [📊 Dashboard Preview](#-dashboard-preview)
-- [🧱 Tech Stack](#-tech-stack)
-- [📦 Future Enhancements](#-future-enhancements)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
+- [Features](#-features)
+- [Architecture Overview](#-architecture-overview)
+- [Why These Tools?](#-why-these-tools)
+- [Getting Started](#-getting-started)
+  - [Run Locally (Without Docker)](#run-locally-without-docker)
+  - [Run with Docker Compose](#run-with-docker-compose)
+- [Project Structure](#-project-structure)
+- [Dashboard Preview](#-dashboard-preview)
+- [Tech Stack](#-tech-stack)
+- [Future Enhancements](#-future-enhancements)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
-## 📌 Features
+## Features
 
 - Fetches Bitcoin and Ethereum prices via CoinGecko API
 - Stores data in both `CSV` and `PostgreSQL`
@@ -34,7 +41,7 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 
 ---
 
-## 📐 Architecture Overview
+## Architecture Overview
 
 ```plaintext
 +----------------+        +-------------------+         +-------------------+
@@ -60,7 +67,7 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 
 ---
 
-## 🧰 Why These Tools?
+## Why These Tools?
 
 | Tool | Why It Was Chosen |
 |------|--------------------|
@@ -74,13 +81,13 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 > You'll need either Python (3.10+) or Docker installed.
 
 ---
 
-### 🧪 Run Locally (Without Docker)
+### Run Locally (Without Docker)
 
 #### 1. Clone the Repository
 
@@ -107,8 +114,15 @@ pip install -r requirements.txt
 Create a `.env` file with:
 
 ```env
+
+CRYPTOCURRENCIES=bitcoin,ethereum
 API_BASE_URL=https://api.coingecko.com/api/v3
-DATABASE_URL=postgresql://user:password@localhost:5432/crypto_db
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=crypto_db
+DB_USER=postgres
+DB_PASSWORD=yourpassword
+
 ```
 
 #### 5. Start PostgreSQL (if not using Docker)
@@ -141,7 +155,7 @@ Visit [http://localhost:8501](http://localhost:8501)
 
 ---
 
-### 🐳 Run with Docker Compose
+### Run with Docker Compose
 
 > Best for consistent, production-ready setup
 
@@ -168,7 +182,7 @@ docker-compose down
 
 ---
 
-## 📦 Docker Usage Summary
+## Docker Usage Summary
 
 | Command                        | Description                                 |
 |--------------------------------|---------------------------------------------|
@@ -182,7 +196,7 @@ docker-compose down
 
 ---
 
-## 🔍 Project Structure
+## Project Structure
 
 ```
 crypto-price-pipeline/
@@ -208,7 +222,7 @@ crypto-price-pipeline/
 
 ---
 
-## 📊 Dashboard Preview
+## Dashboard Preview
 
 The Streamlit dashboard includes:
 - The last 20 price entries
@@ -220,7 +234,7 @@ The Streamlit dashboard includes:
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 - **Language**: Python 3.10
 - **API**: CoinGecko
@@ -232,7 +246,7 @@ The Streamlit dashboard includes:
 
 ---
 
-## 📦 Future Enhancements
+## Future Enhancements
 
 - Switch dashboard to query PostgreSQL directly
 - Add historical trend analysis
@@ -242,7 +256,7 @@ The Streamlit dashboard includes:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Built by DATAFORGE 🌟 
 
@@ -252,7 +266,7 @@ Feel free to open issues or pull requests!
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License. See `LICENSE` for details.
 ```

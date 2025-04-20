@@ -22,15 +22,11 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Auto-refresh the app every 900 seconds
-st.markdown('<meta http-equiv="refresh" content="900">', unsafe_allow_html=True)
-
-
 st.title("📈 Crypto Price Tracker")
 
 st.markdown("""
 This dashboard shows the latest **Bitcoin** and **Ethereum** prices stored in the database.  
-The charts below auto-refresh every 900 seconds to show new entries collected by the pipeline.
+The charts below auto-refresh every 15 minutes to show new entries collected by the pipeline.
 """)
 
 
@@ -51,7 +47,8 @@ try:
 
     if not raw_df.empty:
         # Drop duplicate timestamps and currency, keeping the first occurrence
-        df = raw_df.drop_duplicates(subset=["timestamp", "currency"]).head(20)
+        df = raw_df.drop_duplicates(subset=["timestamp", "currency"]).head(20).reset_index(drop=True)
+
 
         st.subheader("📋 Last 20 Entries")
         st.dataframe(df)
@@ -127,4 +124,4 @@ for remaining in range(refresh_interval, 0, -1):
     time.sleep(1)
 
 # Trigger rerun when countdown finishes
-st.experimental_rerun()
+st.rerun()
