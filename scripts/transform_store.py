@@ -39,17 +39,21 @@ try:
     )
 
     cursor = conn.cursor()
+
+    # Add a unique constraint to ensure PostgreSQL prevents duplicates
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS prices (
             timestamp TIMESTAMP,
             currency TEXT,
-            price NUMERIC
+            price NUMERIC,
+            CONSTRAINT prices_unique UNIQUE (timestamp, currency)
         );
     """)
 
     for _, row in df.iterrows():
         cursor.execute(
-            'INSERT INTO prices (timestamp, currency, price) VALUES (%s, %s, %s)',
+            'INSERT INTO prices (timestamp, currency, price) VALUES (%s, %s, %s) '
+            'ON CONFLICT (timestamp, currency) DO NOTHING',
             (row['timestamp'], row['currency'], row['price'])
         )
 
