@@ -1,7 +1,7 @@
 """
 transform_store.py
 
-This script reads the raw cryptocurrency prices from `prices.csv`,
+This script reads the raw cryptocurrency prices from prices.csv,
 transforms the data into a structured format, and stores it in a PostgreSQL database.
 
 """
@@ -39,21 +39,17 @@ try:
     )
 
     cursor = conn.cursor()
-
-    # Add a unique constraint to ensure PostgreSQL prevents duplicates
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS prices (
             timestamp TIMESTAMP,
             currency TEXT,
-            price NUMERIC,
-            CONSTRAINT prices_unique UNIQUE (timestamp, currency)
+            price NUMERIC
         );
     """)
 
     for _, row in df.iterrows():
         cursor.execute(
-            'INSERT INTO prices (timestamp, currency, price) VALUES (%s, %s, %s) '
-            'ON CONFLICT (timestamp, currency) DO NOTHING',
+            'INSERT INTO prices (timestamp, currency, price) VALUES (%s, %s, %s)',
             (row['timestamp'], row['currency'], row['price'])
         )
 
@@ -62,12 +58,9 @@ try:
     conn.close()
 
     # Clear CSV after storing
-    #open("data/prices.csv", "w").close()
+    open("data/prices.csv", "w").close()
 
     logging.info(f"Inserted {len(df)} rows into the database.")
 
 except Exception as e:
     logging.error(f"Error transforming/storing data: {e}")
-
-
-
