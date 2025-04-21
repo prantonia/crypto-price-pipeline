@@ -43,27 +43,12 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 
 ## Architecture Overview
 
-```plaintext
-+----------------+        +-------------------+         +-------------------+
-|                |        |                   |         |                   |
-| CoinGecko API  +------->+  fetch_prices.py  +-------->+ transform_store.py|
-|                |        |                   |         | (save CSV + DB)   |
-+----------------+        +-------------------+         +-------------------+
-                                                               |
-                                                               v
-                                                   +------------------+       +------------------+
-                                                   |   prices.csv     |-----> |  PostgreSQL DB   |
-                                                   +------------------+       +------------------+
-                                                                                        |
-                                                                                        v
-                                                                              +-----------------------------+
-                                                                              | Streamlit Dashboard (app.py)|
-                                                                              +-----------------------------+
-```
+![Architecture](./assets/architecture.png)
+
 
 - The pipeline runs every 15 minutes via `scheduler.py`
 - Data is saved in a CSV for simplicity and in PostgreSQL for querying and analytics
-- The Streamlit dashboard reads from the CSV for quick visual rendering
+- The Streamlit dashboard reads from the PostgreSQL Database for quick visual rendering
 
 ---
 
@@ -115,13 +100,20 @@ Create a `.env` file with:
 
 ```env
 
+# PostgreSQL Database Configuration
+PG_HOST=your-db-host
+PG_PORT=your-db-port
+PG_USER=your-db-username
+PG_PASSWORD=your-db-password
+PG_DATABASE=your-db-name
+
+# Crypto Settings
 CRYPTOCURRENCIES=bitcoin,ethereum
+
+# API URL
 API_BASE_URL=https://api.coingecko.com/api/v3
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=crypto_db
-DB_USER=postgres
-DB_PASSWORD=yourpassword
+
+
 
 ```
 
@@ -192,6 +184,7 @@ docker-compose down
 | `docker-compose ps`            | Check status of running services            |
 
 ---
+Dashboard Preview
 
 
 ---
@@ -258,11 +251,22 @@ The Streamlit dashboard includes:
 
 ## Contributing
 
-Built by DATAFORGE 🌟 
+We welcome feedback, improvements, or feature requests. Feel free to:
 
-Got ideas? Found a bug? Want to learn more about data engineering and contribute?
+- Fork this repo
 
-Feel free to open issues or pull requests!
+- Create a new branch
+
+- Submit a pull request 
+
+---
+
+## Credits
+
+Built by Team DataForge for Beginner Review Cohort 1.
+
+A learning-focused project for aspiring data engineers.
+
 
 ---
 
