@@ -1,4 +1,4 @@
-services:
+services: 
   db:
     image: postgres
     container_name: dataforge_crypto_db
