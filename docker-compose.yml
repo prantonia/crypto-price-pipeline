@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres
+    container_name: dataforge_crypto_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    image: oma309/dataforge_crypto:latest
+    container_name: dataforge_crypto_app
+    depends_on:
+      - db
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0
+
+  scheduler:
+    build: .
+    image: oma309/crypto_scheduler:latest 
+    container_name: crypto_scheduler
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: python scheduler.py
+
+volumes:
+  pgdata:
