@@ -17,6 +17,7 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 
 - [Features](#-features)
 - [Architecture Overview](#-architecture-overview)
+- [Data Dictionary](#-data-dictionary)
 - [Why These Tools?](#-why-these-tools)
 - [Getting Started](#-getting-started)
   - [Run Locally (Without Docker)](#run-locally-without-docker)
@@ -43,12 +44,22 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 
 ## Architecture Overview
 
-![Architecture](./assets/architecture.png)
+![Architecture](./asserts/architecture_preview.png)
 
 
 - The pipeline runs every 15 minutes via `scheduler.py`
 - Data is saved in a CSV for simplicity and in PostgreSQL for querying and analytics
 - The Streamlit dashboard reads from the PostgreSQL Database for quick visual rendering
+
+---
+
+## Data Dictionary
+
+| Column     | Description                                             | Data Type  | Example                |
+|------------|---------------------------------------------------------|------------|------------------------|
+| `timestamp`| UTC time when the price was fetched                     | `datetime` | `2025-04-21 12:00:00`  |
+| `currency` | Type of cryptocurrency (e.g., BTC, ETH)                 | `string`   | `BTC`                  |
+| `price`    | Current price of the cryptocurrency in USD              | `float`    | `63321.24`             |
 
 ---
 
@@ -183,9 +194,6 @@ docker-compose down
 | `docker logs <container>`      | View container logs                         |
 | `docker-compose ps`            | Check status of running services            |
 
----
-Dashboard Preview
-
 
 ---
 
@@ -217,6 +225,11 @@ crypto-price-pipeline/
 
 ## Dashboard Preview
 
+![Dashboard](./asserts/dashboard_preview.png)
+
+![Dashboard](./asserts/dashboard_preview1.png)
+
+
 The Streamlit dashboard includes:
 - The last 20 price entries
 - Two column charts:
@@ -241,10 +254,9 @@ The Streamlit dashboard includes:
 
 ## Future Enhancements
 
-- Switch dashboard to query PostgreSQL directly
 - Add historical trend analysis
 - Use Airflow or Prefect instead of custom scheduler
-- Deploy dashboard to Streamlit Cloud or Render
+- Deploy dashboard to Streamlit Cloud
 - Add CI/CD pipeline with GitHub Actions
 
 ---
