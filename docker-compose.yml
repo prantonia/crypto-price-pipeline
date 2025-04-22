@@ -1,4 +1,4 @@
-services:
+services: 
   db:
     image: postgres
     container_name: dataforge_crypto_db
@@ -22,6 +22,7 @@ services:
       - .env
     volumes:
       - .:/app
+      
     command: streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0
 
   scheduler:
