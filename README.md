@@ -135,8 +135,6 @@ API_BASE_URL=https://api.coingecko.com/api/v3
 sudo service postgresql start
 ```
 
-Ensure a database called `crypto_db` exists.
-
 #### 6. Run the Pipeline
 
 ```bash

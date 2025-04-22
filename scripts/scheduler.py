@@ -41,7 +41,6 @@ def run_pipeline():
     except Exception as e:
         logging.error(f"Error running pipeline: {e}")
 
-#schedule.every().hour.at(":00").do(run_pipeline)
 
 schedule.every(15).minutes.do(run_pipeline)
 
