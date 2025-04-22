@@ -1,4 +1,4 @@
-services:
+services: 
   db:
     image: postgres
     container_name: dataforge_crypto_db
@@ -12,7 +12,6 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   app:
-    build: .
     image: oma309/dataforge_crypto:latest
     container_name: dataforge_crypto_app
     depends_on:
@@ -26,7 +25,6 @@ services:
     command: streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0
 
   scheduler:
-    build: .
     image: oma309/crypto_scheduler:latest 
     container_name: crypto_scheduler
     depends_on:
