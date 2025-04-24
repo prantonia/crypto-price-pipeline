@@ -88,7 +88,7 @@ Whether you're a data enthusiast, developer, or learner exploring ETL pipelines 
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/crypto-price-pipeline.git
+git clone https://github.com/prantonia/crypto-price-pipeline.git
 cd crypto-price-pipeline
 ```
 
@@ -162,8 +162,24 @@ Visit [http://localhost:8501](http://localhost:8501)
 
 #### 1. Build and Run
 
+- Clone the GitHub repo
+
 ```bash
-docker-compose up --build
+git clone https://github.com/prantonia/crypto-price-pipeline.git
+
+```
+- Pull the docker image
+
+```bash
+docker pull oma309/dataforge_crypto:latest
+```
+
+- Ensure you have a .env file with th database credentials
+
+- Run docker compose
+
+```bash
+docker-compose up -d
 ```
 
 This will:
